@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="my_model">
+    <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://home/can/my_model/meshesmodel://home/can/my_model/meshes</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://my_model/meshes/my_model.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grey</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
