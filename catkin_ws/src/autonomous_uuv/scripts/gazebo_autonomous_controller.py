@@ -9,6 +9,7 @@ import math
 from geometry_msgs.msg import Twist, TwistStamped
 from sensor_msgs.msg import LaserScan, Imu, FluidPressure
 from uuv_sensor_ros_plugins_msgs.msg import DVL
+from nav_msgs.msg import Odometry
 from tf.transformations import euler_from_quaternion
 
 class GazeboAutonomousController:
@@ -25,6 +26,7 @@ class GazeboAutonomousController:
         self.dvl_twist_sub = rospy.Subscriber('dvl_twist', TwistWithCovarianceStamped, self.dvl_twist_callback)
 
         self.imu_sub = rospy.Subscriber('imu_data', Imu, self.imu_callback)
+        self.odom_sub = rospy.Subscriber('odom', Odometry, self.odom_callback)
         self.pressure_sub = rospy.Subscriber('pressure_data', FluidPressure, self.pressure_callback)
 
         from sensor_msgs.msg import Range
@@ -37,6 +39,7 @@ class GazeboAutonomousController:
 
         self.current_depth = 0.0
         self.target_depth = -10.0
+        self.position = [0.0, 0.0, 0.0]
         self.current_altitude = 0.0
 
         self.obstacle_distances = {
@@ -106,6 +109,10 @@ class GazeboAutonomousController:
             msg.twist.twist.linear.z
         ]
 
+
+    def odom_callback(self, msg):
+        p = msg.pose.pose.position
+        self.position = [p.x, p.y, p.z]
 
     def imu_callback(self, msg):
         orientation_q = msg.orientation
@@ -204,8 +211,8 @@ class GazeboAutonomousController:
             depth_error = target_waypoint[2] - self.current_depth
             cmd.linear.z = self.depth_kp * depth_error * 0.5
 
-            dx = target_waypoint[0]
-            dy = target_waypoint[1]
+            dx = target_waypoint[0] - self.position[0]
+            dy = target_waypoint[1] - self.position[1]
             target_yaw = math.atan2(dy, dx)
 
             yaw_error = self.normalize_angle(target_yaw - self.current_yaw)
@@ -286,7 +293,7 @@ class GazeboAutonomousController:
         elif self.mission_state == "NAVIGATE":
             if self.current_waypoint_idx < len(self.waypoints):
                 target = self.waypoints[self.current_waypoint_idx]
-                distance = math.sqrt(target[0]**2 + target[1]**2)
+                distance = math.hypot(target[0] - self.position[0], target[1] - self.position[1])
                 if distance < self.waypoint_threshold:
                     self.current_waypoint_idx += 1
                     rospy.loginfo("Waypoint {} tamamlandı!".format(self.current_waypoint_idx))

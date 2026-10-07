@@ -60,6 +60,7 @@
   <build_export_depend>tf</build_export_depend>
   <build_export_depend>uuv_sensor_ros_plugins_msgs</build_export_depend>
   <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>tf</exec_depend>

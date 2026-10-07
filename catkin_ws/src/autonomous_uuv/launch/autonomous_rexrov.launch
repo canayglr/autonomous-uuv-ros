@@ -28,6 +28,7 @@
       <!-- Gerçek Gazebo topic'lerini kullan -->
       <remap from="dvl_data" to="/$(arg uuv_name)/dvl"/>
       <remap from="dvl_twist" to="/$(arg uuv_name)/dvl_twist"/>
+      <remap from="odom" to="/$(arg uuv_name)/pose_gt"/>
       <remap from="imu_data" to="/$(arg uuv_name)/imu"/>
       <remap from="pressure_data" to="/$(arg uuv_name)/pressure"/>
       <remap from="dvl_sonar0" to="/$(arg uuv_name)/dvl_sonar0"/>
