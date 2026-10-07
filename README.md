@@ -7,11 +7,11 @@
 ![Python](https://img.shields.io/badge/Python-rospy-3776AB?logo=python&logoColor=white)
 ![UUV Simulator](https://img.shields.io/badge/UUV%20Simulator-RexROV-0b7285)
 
-**🇬🇧 English** · [🇹🇷 Türkçe](#-türkçe)
+**<img src="https://raw.githubusercontent.com/canayglr/canayglr/main/assets/flags/gb.png" height="14" alt="EN"/> English** · [<img src="https://raw.githubusercontent.com/canayglr/canayglr/main/assets/flags/tr.png" height="14" alt="TR"/> Türkçe](#tr)
 
 </div>
 
-## 🇬🇧 Overview
+## <img src="https://raw.githubusercontent.com/canayglr/canayglr/main/assets/flags/gb.png" height="14" alt="EN"/> Overview
 
 An autonomous mission controller for an underwater vehicle (RexROV) running in the **UUV Simulator / Gazebo** environment. The vehicle dives to a target depth, follows a set of waypoints, avoids obstacles with sonar and holds its position when the mission is complete.
 
@@ -60,7 +60,9 @@ roslaunch autonomous_uuv autonomous_rexrov.launch
 
 ---
 
-## 🇹🇷 Türkçe
+<a name="tr"></a>
+
+## <img src="https://raw.githubusercontent.com/canayglr/canayglr/main/assets/flags/tr.png" height="14" alt="TR"/> Türkçe
 
 **UUV Simulator / Gazebo** ortamında çalışan su altı aracı (RexROV) için otonom görev kontrolcüsü. Araç hedef derinliğe dalar, waypoint'leri sırayla takip eder, sonar ile engellerden kaçınır ve görev bitince konumunu korur.
 
